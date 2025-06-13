@@ -1,7 +1,6 @@
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { createTodoHandler } from "./server/create-todo-handler";
 import { vikeHandler } from "./server/vike-handler";
 import { createHandler } from "@universal-middleware/express";
 import express from "express";
@@ -21,9 +20,6 @@ async function startServer() {
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(`${root}/dist/client`));
   } else {
-    // Instantiate Vite's development server and integrate its middleware to our server.
-    // ⚠️ We should instantiate it *only* in development. (It isn't needed in production
-    // and would unnecessarily bloat our server in production.)
     const viteDevMiddleware = (
       await createDevMiddleware({
         root,
@@ -35,13 +31,6 @@ async function startServer() {
     app.use(viteDevMiddleware);
   }
 
-  app.post("/api/todo/create", createHandler(createTodoHandler)());
-
-  /**
-   * Vike route
-   *
-   * @link {@see https://vike.dev}
-   **/
   app.all("{*vike}", createHandler(vikeHandler)());
 
   app.listen(port, () => {
