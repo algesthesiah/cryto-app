@@ -3,20 +3,28 @@
     "dev": "tsx ./express-entry.ts",
     "build": "vike build",
     "preview": "cross-env NODE_ENV=production tsx ./express-entry.ts",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@sentry/react": "^9.27.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@universal-middleware/core": "^0.4.7",
     "@universal-middleware/express": "^0.4.16",
     "@vitejs/plugin-react": "^4.5.1",
+    "@vitest/coverage-v8": "^3.2.3",
     "ahooks": "^3.8.5",
     "express": "^5.1.0",
+    "jsdom": "^26.1.0",
     "nnbit-utils": "1.0.1-beta.48",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "vike": "^0.4.231",
-    "vike-react": "^0.6.4"
+    "vike-react": "^0.6.4",
+    "vitest": "^3.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",

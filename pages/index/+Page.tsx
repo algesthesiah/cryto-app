@@ -33,7 +33,9 @@ export default function Page() {
     return walletBlance?.map((v) => {
       const currentRate = rateDateMap[v.currency];
       const currentCoin = coinListMap[v.currency];
-      const value = decimalUtils.SafeCalcUtil.mul(currentRate.rates?.[0].rate, v.amount).toString();
+      const value = currentRate?.rates?.[0]?.rate
+        ? decimalUtils.SafeCalcUtil.mul(currentRate.rates[0].rate, v.amount).toString()
+        : "0";
       return { ...v, value: value, ...currentCoin } as overviewItem;
     });
   }, [rateData, walletBlance, rateDateMap]);
